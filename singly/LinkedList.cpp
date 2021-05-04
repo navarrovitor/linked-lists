@@ -57,27 +57,18 @@ void LinkedList::addBack(int e)
   qtyNodes++;
 }
 
-// string LinkedList::addInPosition(int e, int position)
-
 void LinkedList::addInPosition(int e, int position)
 {
-  // stringstream response;
-  // while (true)
-  // {
   if (position < 1)
   {
     cout << "POSITION MUST BE GREATER THAN 1." << endl;
 
-    // response << "POSITION MUST BE GREATER THAN 1.";
-    // break;
     return;
   }
   if (position > qtyNodes + 1)
   {
     cout << "POSITION INEXISTENT. THE LIST HAS " << qtyNodes << " NODES." << endl;
 
-    // response << "POSITION INEXISTENT. THE LIST HAS " << qtyNodes << " NODES.";
-    // break;
     return;
   }
   if (position == 1)
@@ -85,8 +76,6 @@ void LinkedList::addInPosition(int e, int position)
     addFront(e);
     cout << "ADDED AT FRONT" << endl;
 
-    // response << "ADDED AT FRONT";
-    // break;
     return;
   }
   Node *temp = new Node(e), *aux = head;
@@ -99,11 +88,42 @@ void LinkedList::addInPosition(int e, int position)
   qtyNodes++;
   cout << "ADDED AT POSITION No " << position << endl;
 
-  // response << "ADDED AT POSITION No " << position;
-  // break;
   return;
-  // }
-  // return response.str();
+}
+
+string LinkedList::addInPositionString(int e, int position)
+{
+  stringstream response;
+  while (true)
+  {
+    if (position < 1)
+    {
+      response << "POSITION MUST BE GREATER THAN 1.";
+      break;
+    }
+    if (position > qtyNodes + 1)
+    {
+      response << "POSITION INEXISTENT. THE LIST HAS " << qtyNodes << " NODES.";
+      break;
+    }
+    if (position == 1)
+    {
+      addFront(e);
+      response << "ADDED AT FRONT";
+      break;
+    }
+    Node *temp = new Node(e), *aux = head;
+
+    for (int i = 0; i < position - 2; i++)
+      aux = aux->next;
+    temp->next = aux->next;
+    aux->next = temp;
+
+    qtyNodes++;
+    response << "ADDED AT POSITION No " << position;
+    break;
+  }
+  return response.str();
 }
 
 void LinkedList::removeFront()
@@ -154,36 +174,22 @@ void LinkedList::removeBack()
   }
 }
 
-// string LinkedList::removeInPosition(int position)
-
 void LinkedList::removeInPosition(int position)
 {
-  // stringstream response;
-  // while (true)
-  // {
   if (position < 1)
   {
     cout << "POSITION MUST BE GREATER THAN 1." << endl;
-
-    // response << "POSITION MUST BE GREATER THAN 1.";
-    // break;
     return;
   }
   if (position > qtyNodes + 1)
   {
     cout << "POSITION INEXISTENT. THE LIST HAS " << qtyNodes << " NODES." << endl;
-
-    // response << "POSITION INEXISTENT. THE LIST HAS " << qtyNodes << " NODES.";
-    // break;
     return;
   }
   if (position == 1)
   {
     removeFront();
     cout << "REMOVED AT FRONT" << endl;
-
-    // response << "REMOVED AT FRONT";
-    // break;
     return;
   }
   Node *aux = head;
@@ -196,11 +202,43 @@ void LinkedList::removeInPosition(int position)
 
   qtyNodes--;
   cout << "REMOVED AT POSITION No " << position << endl;
-  // response << "REMOVED AT POSITION No " << position;
-  // break;
   return;
-  // }
-  // return response.str();
+}
+
+string LinkedList::removeInPositionString(int position)
+{
+  stringstream response;
+  while (true)
+  {
+    if (position < 1)
+    {
+      response << "POSITION MUST BE GREATER THAN 1.";
+      break;
+    }
+    if (position > qtyNodes + 1)
+    {
+      response << "POSITION INEXISTENT. THE LIST HAS " << qtyNodes << " NODES.";
+      break;
+    }
+    if (position == 1)
+    {
+      removeFront();
+      response << "REMOVED AT FRONT";
+      break;
+    }
+    Node *aux = head;
+
+    for (int i = 0; i < position - 2; i++)
+      aux = aux->next;
+    Node *temp = aux->next;
+    aux->next = temp->next;
+    delete temp;
+
+    qtyNodes--;
+    response << "REMOVED AT POSITION No " << position;
+    break;
+  }
+  return response.str();
 }
 
 void LinkedList::removeNode(Node *node)
@@ -340,7 +378,7 @@ void LinkedList::sort()
   }
 }
 
-bool LinkedList::present(int e)
+bool LinkedList::isPresent(int e)
 {
   Node *aux = head;
   while (aux != NULL)
@@ -372,7 +410,7 @@ void LinkedList::listIntersection(LinkedList a, LinkedList b)
   LinkedList one = a, two = b;
   while (two.head != NULL)
   {
-    if (one.present(two.head->data))
+    if (one.isPresent(two.head->data))
     {
       addBack(two.head->data);
     }
@@ -385,7 +423,7 @@ void LinkedList::listSubtraction(LinkedList a, LinkedList b)
   LinkedList one = a, two = b;
   while (one.head != NULL)
   {
-    if (!two.present(one.head->data))
+    if (!two.isPresent(one.head->data))
     {
       addBack(one.head->data);
     }
@@ -393,15 +431,17 @@ void LinkedList::listSubtraction(LinkedList a, LinkedList b)
   }
 }
 
-void LinkedList::listSubset(LinkedList a, LinkedList b)
+bool LinkedList::listSubset(LinkedList x)
 {
-  LinkedList one = a, two = b;
+  LinkedList two = x;
+  int aux = 0;
   while (two.head != NULL)
   {
-    if (one.present(two.head->data))
+    if (isPresent(two.head->data))
     {
-      addBack(two.head->data);
+      aux++;
     }
     two.head = two.head->next;
   }
+  return aux == qtyNodes ? true : false;
 }
