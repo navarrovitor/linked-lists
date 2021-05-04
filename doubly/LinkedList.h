@@ -20,4 +20,17 @@ public:
   int front();
   // returns the data of the back (last) node of a list
   int back();
+
+  /* ADD METHODS */
+
+  // add a node to the front of a list
+  void addFront(Data e);
+  // add a node to the back of a list
+  void addBack(Data e);
+
+protected:
+  // add a node before node v
+  void add(Node *v, Data e);
+  // remove node v
+  void remove(Node *v);
 };

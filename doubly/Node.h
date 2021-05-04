@@ -5,11 +5,11 @@
 #include <string.h>
 
 using namespace std;
-
+typedef int Data;
 class Node
 {
 private:
-  int data;
+  Data data;
   Node *next;
   Node *previous;
 
