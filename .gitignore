@@ -1,4 +1,4 @@
-makefile
+**/Makefile
 *.exe
 *.out
 *.app
