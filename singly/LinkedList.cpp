@@ -11,7 +11,13 @@ bool LinkedList::empty() { return head == NULL; }
 
 int LinkedList::qty() { return qtyNodes; }
 
-int LinkedList::front() { return head->data; }
+int LinkedList::front()
+{
+  if (empty())
+    return -1;
+  else
+    return head->data;
+}
 
 int LinkedList::middle()
 {
@@ -61,33 +67,27 @@ void LinkedList::addInPosition(int e, int position)
 {
   if (position < 1)
   {
-    cout << "POSITION MUST BE GREATER THAN 1." << endl;
-
+    cout << "A POSIÇÃO TEM DE SER MAIOR QUE 1." << endl;
     return;
   }
   if (position > qtyNodes + 1)
   {
-    cout << "POSITION INEXISTENT. THE LIST HAS " << qtyNodes << " NODES." << endl;
-
+    cout << "POSIÇÃO INEXISTENTE. A LISTA TEM " << qtyNodes << " NÓS." << endl;
     return;
   }
   if (position == 1)
   {
     addFront(e);
-    cout << "ADDED AT FRONT" << endl;
-
     return;
   }
-  Node *temp = new Node(e), *aux = head;
 
+  Node *temp = new Node(e), *aux = head;
   for (int i = 0; i < position - 2; i++)
     aux = aux->next;
   temp->next = aux->next;
   aux->next = temp;
 
   qtyNodes++;
-  cout << "ADDED AT POSITION No " << position << endl;
-
   return;
 }
 
@@ -130,7 +130,7 @@ void LinkedList::removeFront()
 {
   if (empty())
   {
-    cout << "EMPTY LIST." << endl;
+    return;
   }
 
   else
@@ -147,7 +147,7 @@ void LinkedList::removeBack()
   Node *aux;
   if (empty())
   {
-    cout << "EMPTY LIST." << endl;
+    return;
   }
   else
   {
@@ -310,10 +310,22 @@ void LinkedList::removeDuplicates()
   }
 }
 
+void LinkedList::removeAll()
+{
+  Node *current = head, *next = NULL;
+  while (current != NULL)
+  {
+    next = current->next;
+    free(current);
+    current = next;
+  }
+  head = NULL;
+}
+
 void LinkedList::print()
 {
   if (empty())
-    cout << "EMPTY LIST." << endl;
+    cout << "LISTA VAZIA." << endl;
   else
   {
     Node *aux = head;

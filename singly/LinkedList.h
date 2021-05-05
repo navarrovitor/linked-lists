@@ -51,6 +51,8 @@ public:
   void removeDuplicates();
   // remove the current node (useful when iterating through a list)
   void removeCurrentNode(Node *previous, Node *current);
+  // remove all nodes
+  void removeAll();
 
   /* MISCELANEOUS METHODS */
 
