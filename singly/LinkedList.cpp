@@ -392,16 +392,23 @@ bool LinkedList::isPresent(int e)
 
 void LinkedList::listUnion(LinkedList a, LinkedList b)
 {
-  LinkedList one = a, two = b;
-  while (one.head != NULL)
+  int i;
+  Node *one = a.head, *two = b.head;
+  for (i = 0; i < a.qtyNodes; i++)
   {
-    addBack(one.head->data);
-    one.head = one.head->next;
+    if (!isPresent(one->data))
+    {
+      addBack(one->data);
+    }
+    one = one->next;
   }
-  while (two.head != NULL)
+  for (i = 0; i < b.qtyNodes; i++)
   {
-    addBack(two.head->data);
-    two.head = two.head->next;
+    if (!isPresent(two->data))
+    {
+      addBack(two->data);
+    }
+    two = two->next;
   }
 }
 
