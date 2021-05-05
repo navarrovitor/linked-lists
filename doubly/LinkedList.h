@@ -28,6 +28,13 @@ public:
   // add a node to the back of a list
   void addBack(Data e);
 
+  /* REMOVE METHODS */
+
+  // remove the node at the front of a list
+  void removeFront();
+  // remove the node at the back of a list
+  void removeBack();
+
 protected:
   // add a node before node v
   void add(Node *v, Data e);

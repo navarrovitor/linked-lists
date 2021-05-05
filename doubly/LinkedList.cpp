@@ -28,3 +28,16 @@ void LinkedList::add(Node *v, Data e)
 void LinkedList::addFront(Data e) { add(header->next, e); }
 
 void LinkedList::addBack(Data e) { add(trailer, e); }
+
+void LinkedList::remove(Node *v)
+{
+  Node *u = v->previous;
+  Node *w = v->next;
+  u->next = w;
+  w->previous = u;
+  delete v;
+}
+
+void LinkedList::removeFront() { remove(header->next); }
+
+void LinkedList::removeBack() { remove(trailer->previous); }
