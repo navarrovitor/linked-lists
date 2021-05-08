@@ -114,6 +114,7 @@ void LinkedList::removeBack()
   size--;
 }
 
+/* NOT WORKING YET */
 void LinkedList::removeInPosition(int position)
 {
   if (position < 1)
@@ -134,11 +135,11 @@ void LinkedList::removeInPosition(int position)
   Node *aux = head, *aux2;
   for (int i = 0; i < position - 1; i++)
     aux = aux->next;
-  // if (aux == tail)
-  // {
-  //   tail = aux;
-  // }
-  // aux2 = aux->prev;
+  if (aux == tail)
+  {
+    tail = aux;
+  }
+  aux2 = aux->prev;
   aux2->next = aux->next;
   aux->next->prev = aux2;
   delete aux;
