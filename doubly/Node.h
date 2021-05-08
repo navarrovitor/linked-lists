@@ -9,13 +9,13 @@ typedef int Data;
 class Node
 {
 private:
+  Node *prev;
   Data data;
   Node *next;
-  Node *previous;
 
   friend class LinkedList;
 
 public:
-  Node(int e);
+  Node(Data d);
 };
 #endif

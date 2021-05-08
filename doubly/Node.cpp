@@ -1,8 +1,7 @@
 #include "Node.h"
 
-Node::Node(int e)
+Node::Node(Data d)
 {
-  data = e;
-  next = NULL;
-  previous = NULL;
+  data = d;
+  prev = next = NULL;
 }
