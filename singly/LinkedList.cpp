@@ -153,9 +153,9 @@ void LinkedList::removeBack()
   {
     if (head->next == NULL)
     {
-      aux = head;
+      // aux = head;
       head = NULL;
-      delete aux;
+      // delete aux;
       qtyNodes--;
     }
     else
@@ -215,7 +215,7 @@ string LinkedList::removeInPositionString(int position)
       response << "POSITION MUST BE GREATER THAN 1.";
       break;
     }
-    if (position > qtyNodes + 1)
+    if (position > qtyNodes)
     {
       response << "POSITION INEXISTENT. THE LIST HAS " << qtyNodes << " NODES.";
       break;
