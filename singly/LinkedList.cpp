@@ -181,7 +181,7 @@ void LinkedList::removeInPosition(int position)
     cout << "POSITION MUST BE GREATER THAN 1." << endl;
     return;
   }
-  if (position > qtyNodes + 1)
+  if (position > qtyNodes)
   {
     cout << "POSITION INEXISTENT. THE LIST HAS " << qtyNodes << " NODES." << endl;
     return;
