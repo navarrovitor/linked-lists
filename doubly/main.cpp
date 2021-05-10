@@ -11,7 +11,13 @@ int main()
   list1.addBack(1);
   list1.addBack(2);
   list1.addBack(3);
-  list1.removeInPosition(3);
+  list1.addBack(4);
+  list1.addBack(5);
+  list1.addFront(6);
+  cout << "front: " << list1.frontValue() << ", back: " << list1.backValue() << endl;
+  list1.print();
+  list1.removeInPosition(6);
+  cout << "front: " << list1.frontValue() << ", back: " << list1.backValue() << endl;
   list1.print();
   return 0;
 }
@@ -162,3 +168,5 @@ int main()
 // cout << "\n10 - imprimir a lista";
 // cout << "\n11 - primeiro da lista";
 // cout << "\n12 - ultimo da lista";
+// cout << "\n13 - excluir itens repetidos da lista";
+// cout << "\n14 - deixa a lista em ordem crescente";

@@ -11,6 +11,10 @@ bool LinkedList::empty() { return size == 0; }
 
 int LinkedList::qty() { return size; }
 
+int LinkedList::frontValue() { return head->data; }
+
+int LinkedList::backValue() { return tail->data; }
+
 void LinkedList::addInEmpty(Data data)
 {
   if (empty())
@@ -24,6 +28,7 @@ void LinkedList::addInEmpty(Data data)
     return;
 }
 
+/* repair */
 void LinkedList::addFront(Data data)
 {
   Node *node = new Node(data);
@@ -114,15 +119,36 @@ void LinkedList::removeBack()
   size--;
 }
 
-/* NOT WORKING YET */
+void LinkedList::removeNode(Node *node)
+{
+  if (head == NULL || node == NULL)
+    return;
+  if (head == node)
+    head = node->next;
+  if (node->next != NULL)
+  {
+    tail = node->prev;
+    node->next->prev = node->prev;
+  }
+  if (node->prev != NULL)
+    node->prev->next = node->next;
+  delete node;
+  size--;
+}
+
 void LinkedList::removeInPosition(int position)
 {
+  if (empty())
+  {
+    cout << "A lista está vazia, não há o que remover." << endl;
+    return;
+  }
   if (position < 1)
   {
     cout << "A posição tem de ser maior ou igual a 1." << endl;
     return;
   }
-  if (position > size + 1)
+  if (position > size)
   {
     cout << "Essa posição não existe. A lista tem " << size << " elementos" << endl;
     return;
@@ -132,18 +158,18 @@ void LinkedList::removeInPosition(int position)
     removeFront();
     return;
   }
-  Node *aux = head, *aux2;
-  for (int i = 0; i < position - 1; i++)
-    aux = aux->next;
-  if (aux == tail)
+  if (position == size)
   {
-    tail = aux;
+    removeBack();
+    return;
   }
-  aux2 = aux->prev;
-  aux2->next = aux->next;
-  aux->next->prev = aux2;
-  delete aux;
-  size--;
+
+  Node *aux = head;
+  for (int i = 1; aux != NULL && i < position; i++)
+    aux = aux->next;
+  if (aux == NULL)
+    return;
+  removeNode(aux);
   return;
 }
 

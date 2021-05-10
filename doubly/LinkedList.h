@@ -12,6 +12,8 @@ public:
 
   bool empty();
   int qty();
+  int frontValue();
+  int backValue();
 
   void addInEmpty(Data data);
   void addFront(Data data);
@@ -19,6 +21,7 @@ public:
   void addInPosition(Data data, int position);
   void removeFront();
   void removeBack();
+  void removeNode(Node *node);
   void removeInPosition(int position);
 
   void print();
