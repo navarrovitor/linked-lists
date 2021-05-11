@@ -9,8 +9,8 @@ typedef int Data;
 class Node
 {
 private:
-  Node *prev;
   Data data;
+  Node *prev;
   Node *next;
 
   friend class LinkedList;
