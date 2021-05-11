@@ -28,7 +28,6 @@ void LinkedList::addInEmpty(Data data)
     return;
 }
 
-/* repair */
 void LinkedList::addFront(Data data)
 {
   Node *node = new Node(data);
@@ -86,32 +85,38 @@ void LinkedList::addInPosition(Data data, int position)
   return;
 }
 
-void LinkedList::removeFront()
+bool LinkedList::checkRemove()
 {
+  if (empty())
+  {
+    cout << "A lista está vazia, não há o que remover." << endl;
+    return false;
+  }
   if (size == 1)
   {
     head = NULL;
     tail = NULL;
     size--;
-    return;
+    return false;
   }
+  else
+    return true;
+}
+
+void LinkedList::removeFront()
+{
+  if (!checkRemove())
+    return;
   Node *aux = head;
   head = head->next;
   delete aux;
-  aux = NULL;
-  head->prev = NULL;
   size--;
 }
 
 void LinkedList::removeBack()
 {
-  if (size == 1)
-  {
-    head = NULL;
-    tail = NULL;
-    size--;
+  if (!checkRemove())
     return;
-  }
   Node *aux = tail->prev, *aux2 = tail;
   aux->next = NULL;
   tail = aux;
@@ -167,10 +172,33 @@ void LinkedList::removeInPosition(int position)
   Node *aux = head;
   for (int i = 1; aux != NULL && i < position; i++)
     aux = aux->next;
-  if (aux == NULL)
-    return;
   removeNode(aux);
   return;
+}
+
+void LinkedList::removeDuplicates()
+{
+  if (!checkRemove())
+  {
+    cout << "entrou no if wtf";
+    return;
+  }
+  Node *one, *two;
+  for (one = head; one != NULL; one = one->next)
+  {
+    two = one->next;
+    while (two != NULL)
+    {
+      if (one->data == two->data)
+      {
+        Node *next = two->next;
+        removeNode(two);
+        two = next;
+      }
+      else
+        two = two->next;
+    }
+  }
 }
 
 void LinkedList::print()
